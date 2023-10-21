@@ -259,7 +259,7 @@ if __name__=="__main__":
     modelOrder = 4
     stepSize = 5
     path_bids = 'C:/Users/Kajc/JupyterNotebooks/BRAIN2SPEECH/data/SingleWordProductionDutch-iBIDS/SingleWordProductionDutch-iBIDS'
-    path_output = 'C:/Users/Kajc/JupyterNotebooks/BRAIN2SPEECH/data/SingleWordProductionDutch-iBIDS/SingleWordProductionDutch-iBIDS/features'
+    path_output = 'C:/Users/Kajc/JupyterNotebooks/BRAIN2SPEECH/data/preprocessed'
     participants = pd.read_csv(os.path.join(path_bids,'participants.tsv'), delimiter='\t')
     for p_id, participant in enumerate(participants['participant_id']):
         
