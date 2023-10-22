@@ -24,7 +24,7 @@ https://www.nature.com/articles/s41597-022-01542-9
 - initial files created
 - future design plans:
     - `train.py` - retrain model
-    - `test.py` - load trained model, EEG data -> syntetise speech
+    - `test.py` - load trained model, EEG data -> synthesise speech
 
 
 
