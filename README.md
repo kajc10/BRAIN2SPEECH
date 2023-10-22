@@ -1,6 +1,6 @@
 # BRAIN2SPEECH
 
-:warning: Repository under development - current stage: Milestone1 
+:warning: Repository under development - current stage: Milestone1 :warning: 
 ```
 Course: BMEVITMMA19 2023/24/1 
 Project Topic: BRAIN2SPEECH 
