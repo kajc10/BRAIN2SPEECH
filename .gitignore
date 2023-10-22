@@ -1,0 +1,4 @@
+data/
+bin/
+.ipynb_checkpoints/
+launch.json
