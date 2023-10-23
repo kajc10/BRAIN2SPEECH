@@ -2,9 +2,9 @@ import pytorch_lightning as pl
 import torch.nn as nn
 import torch
 
-class MultiTaskEEGModel(pl.LightningModule):
+class MultiTaskIEEGModel(pl.LightningModule):
     def __init__(self, input_dim, hidden_dim, spectrogram_dim, embedding_dim, num_words):
-        super(MultiTaskEEGModel, self).__init__()
+        super(MultiTaskIEEGModel, self).__init__()
 
         # Shared Encoder
         self.encoder = nn.Sequential(
