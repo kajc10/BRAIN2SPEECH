@@ -21,10 +21,7 @@ class IEEGDataset(Dataset):
         self.participants = participants #['sub-%02d' % i for i in range(1, 11)]
 
         if preprocess_again:
-            print('### Preprocessing data in Dataset Init ###')
-            self.features = []   # features
-            self.spectrograms = [] # spectrogram
-            
+            print('### Preprocessing data in Dataset Init ###')           
             for pt in self.participants:
                 feature, spectrogram = self._process_pt_data(pt)
                 self.features.append(feature)
