@@ -21,10 +21,7 @@ class IEEGDataset(Dataset):
         self.participants = participants #['sub-%02d' % i for i in range(1, 11)]
 
         if preprocess_again:
-            print('### Preprocessing data in Dataset Init ###')
-            self.features = []   # features
-            self.spectrograms = [] # spectrogram
-            
+            print('### Preprocessing data in Dataset Init ###')           
             for pt in self.participants:
                 feature, spectrogram = self._process_pt_data(pt)
                 self.features.append(feature)
@@ -77,7 +74,9 @@ class IEEGDataset(Dataset):
     
     def __getitem__(self, idx):
         # TODO also return word embedding for multitask learning
-        sample = self.features[idx], self.spectrograms[idx]
-        if self.transform:
-            sample = self.transform(sample)  # TODO separate transform for feature and spectrogram
+        #sample = self.features[idx], self.spectrograms[idx]
+        #if self.transform:
+        #    sample = self.transform(sample)  # TODO separate transform for feature and spectrogram
+        #return sample
+        sample = torch.tensor(self.features[idx], dtype=torch.float32), torch.tensor(self.spectrograms[idx], dtype=torch.float32)
         return sample
