@@ -19,11 +19,13 @@ https://www.nature.com/articles/s41597-022-01542-9
 ## Milestone 1
 - data was downloaded from https://osf.io/nrgx6. (also can be acquired via  [direct link](https://files.de-1.osf.io/v1/resources/nrgx6/providers/osfstorage/623d9d9a938b480e3797af8f) )
 - [SingleWordProductionDutch](https://github.com/neuralinterfacinglab/SingleWordProductionDutch) codebase was used for preprocessing. If new participant data is added, the `extract_features.py` should be used for feature extraction.
+- `dataset.py` contains Dataset, during init it prepares data for a dataloader or loads prepared data from file
+- `network.py` contians initial dummy network, no serious design choices yet
 - initial Docker file provided
-- initial files created
 - future design plans:
     - `train.py` - retrain model
-    - `test.py` - load trained model, iEEG data -> synthesise speech
+    - `test.py` - with the help of the trianed model convert iEEG data to audio
+    -  extend data with word embeddings, train a multi-task model
 
 
 
