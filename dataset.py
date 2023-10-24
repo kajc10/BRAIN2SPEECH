@@ -74,7 +74,9 @@ class IEEGDataset(Dataset):
     
     def __getitem__(self, idx):
         # TODO also return word embedding for multitask learning
-        sample = self.features[idx], self.spectrograms[idx]
-        if self.transform:
-            sample = self.transform(sample)  # TODO separate transform for feature and spectrogram
+        #sample = self.features[idx], self.spectrograms[idx]
+        #if self.transform:
+        #    sample = self.transform(sample)  # TODO separate transform for feature and spectrogram
+        #return sample
+        sample = torch.tensor(self.features[idx], dtype=torch.float32), torch.tensor(self.spectrograms[idx], dtype=torch.float32)
         return sample
