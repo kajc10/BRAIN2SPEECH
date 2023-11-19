@@ -80,3 +80,13 @@ class IEEGDataset(Dataset):
         #return sample
         sample = torch.tensor(self.features[idx], dtype=torch.float32), torch.tensor(self.spectrograms[idx], dtype=torch.float32)
         return sample
+
+
+if __name__ == '__main__':
+    data_path = "data/preprocessed"
+    participants = ['sub-%02d' % i for i in range(1, 11)]
+
+    dataset = IEEGDataset(feat_path=data_path, participants=participants, preprocess_again=False)
+    element = dataset.__getitem__(0)
+    print('feature: ',element[0])
+    print('spectogram',element[1])
