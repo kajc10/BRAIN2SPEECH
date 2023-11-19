@@ -18,6 +18,9 @@ if __name__ == "__main__":
 
     train_dataset, val_dataset, test_dataset = random_split(dataset, [num_train, num_val, num_test])
 
+    torch.save(test_dataset, 'data/test_dataset.pth')
+
+
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, num_workers=4)
     val_loader = DataLoader(val_dataset, batch_size=32, shuffle=False)
     test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)

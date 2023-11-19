@@ -1,6 +1,6 @@
 # BRAIN2SPEECH
 
-:warning: Repository under development - current stage: Milestone1 :warning: 
+:warning: Repository under development - current stage: Milestone2 :warning: 
 ```
 Course: BMEVITMMA19 2023/24/1 
 Project Topic: BRAIN2SPEECH 
@@ -16,9 +16,21 @@ Related works: \
 https://github.com/neuralinterfacinglab/SingleWordProductionDutch \
 https://www.nature.com/articles/s41597-022-01542-9
 
+## Milestone 2
+- to preprocess data: `python SingleWordProductionDutch/extract_features.py `
+- to test dataset: `python dataset.py`
+- to train model: `python train.py`
+- to test model: `python test.py`
+
+next steps:
+- longer trainings
+- multi-task model
+- 2audio script
+ 
+
 ## Milestone 1
 - data was downloaded from https://osf.io/nrgx6. (also can be acquired via  [direct link](https://files.de-1.osf.io/v1/resources/nrgx6/providers/osfstorage/623d9d9a938b480e3797af8f) )
-- [SingleWordProductionDutch](https://github.com/neuralinterfacinglab/SingleWordProductionDutch) codebase was used for preprocessing. If new participant data is added, the `extract_features.py` should be used for feature extraction.
+- [SingleWordProductionDutch](https://github.com/neuralinterfacinglab/SingleWordProductionDutch) codebase was used for preprocessing. If new participant data is added, the `SingleWordProductionDutch/extract_features.py` should be used for feature extraction.
 - `dataset.py` contains Dataset, during init it prepares data for a dataloader or loads prepared data from file
 - `network.py` contians initial dummy network, no serious design choices yet
 - initial Docker file provided

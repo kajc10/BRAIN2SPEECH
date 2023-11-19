@@ -42,6 +42,13 @@ class SimpleIEEGModel(pl.LightningModule):
         loss = self.loss_fn(pred_spectrogram, y_spectrogram)
         self.log("val_loss", loss)
         return loss
+    
+    def test_step(self, batch, batch_idx):
+        x, y_spectrogram = batch
+        pred_spectrogram = self(x)
+        loss = self.loss_fn(pred_spectrogram, y_spectrogram)
+        self.log("test_loss", loss)
+        return loss
 
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters(), lr=0.001)
