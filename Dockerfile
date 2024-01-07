@@ -1,8 +1,10 @@
 # Use NVIDIA's official CUDA Ubuntu image as a parent image
-FROM nvidia/cuda:11.0-base-ubuntu20.04
+FROM nvidia/cuda:11.0.3-base-ubuntu20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install necessary packages
-RUN apt-get update && apt-get install -y git openssh-server
+RUN apt-get update && apt-get install -y git openssh-server python3-pip
 
 # Clone the repo
 RUN git clone https://github.com/kajc10/BRAIN2SPEECH.git
@@ -12,6 +14,8 @@ WORKDIR /BRAIN2SPEECH
 
 # Install Python dependencies
 RUN pip3 install --no-cache-dir -r requirements.txt
+
+RUN chmod +x /download_dataset.sh
 
 # Set up SSH server
 RUN echo 'root:root' | chpasswd
