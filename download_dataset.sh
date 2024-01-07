@@ -18,5 +18,5 @@ wget -O "$DATASET_FILENAME" "$DATASET_URL"
 # Unzip the dataset if it is a zip file
 unzip "$DATASET_FILENAME" -d "$DATASET_SAVE_PATH"
 
-# Remove the zip file after extracting its contents
-rm "$DATASET_FILENAME"
+# Optionally, remove the zip file after extracting
+#rm "$DATASET_FILENAME"

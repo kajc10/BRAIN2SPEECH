@@ -1,5 +1,4 @@
-data/SingleWordProductionDutch-iBIDS/*
-data/preprocessed/*
+!data/data.md
 bin/
 .ipynb_checkpoints/
 launch.json

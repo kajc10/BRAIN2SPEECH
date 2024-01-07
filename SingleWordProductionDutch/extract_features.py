@@ -169,8 +169,8 @@ if __name__=="__main__":
     frameshift = 0.01
     modelOrder = 4
     stepSize = 5
-    path_bids = r'./SingleWordProductionDutch-iBIDS'
-    path_output = r'./features'
+    path_bids = r'./data/SingleWordProductionDutch-iBIDS'
+    path_output = r'./data/features'
     participants = pd.read_csv(os.path.join(path_bids,'participants.tsv'), delimiter='\t')
     for p_id, participant in enumerate(participants['participant_id']):
         

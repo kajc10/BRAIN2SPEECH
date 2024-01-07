@@ -83,7 +83,7 @@ class IEEGDataset(Dataset):
 
 
 if __name__ == '__main__':
-    data_path = "data/preprocessed"
+    data_path = "data/features"
     participants = ['sub-%02d' % i for i in range(1, 11)]
 
     dataset = IEEGDataset(feat_path=data_path, participants=participants, preprocess_again=False)
