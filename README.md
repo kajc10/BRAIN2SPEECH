@@ -18,24 +18,29 @@ https://www.nature.com/articles/s41597-022-01542-9
 ## Milestone 3
 
 ### Setup
+First the environment has to be set up, data needs to be downloaded, and an external preprocess script needs to be run.
 #### Option1 - conda env
-Use the repository directly: `conda create -n brain2speech`, `conda activate brain2speech`, `pip install -r requirements.txt`
+Use the repository directly: 
+```
+conda create -n brain2speech
+conda activate brain2speech
+pip install -r requirements.txt
+```
 The dataset can be downloaded via [direct link](https://files.de-1.osf.io/v1/resources/nrgx6/providers/osfstorage/623d9d9a938b480e3797af8f) or downloader script `download_dataset.sh` (Linux) / `download_dataset.ps1` (Windows; you might need 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ').
 The dataset shall be placed as `data/SingleWordProductionDutch-iBIDS`.
 Run dataset feature extraction provided by the original repository: `python SingleWordProductionDutch/extract_features.py` . It will place data under `data/features`.
 
 #### Option2 - docker image
-A docker image can be pulled and directly used by commands: `docker pull kajc10/brain2speech`and `docker run -it --rm brain2speech`.
+A docker image can be pulled and directly used by commands: `docker pull kajc10/brain2speech` and `docker run -it --rm brain2speech`.
 To download dataset run: `download_dataset.sh`. It will be placed as `data/SingleWordProductionDutch-iBIDS`.
-Run dataset feature extraction provided by the original repository: `python SingleWordProductionDutch/extract_features.py` . It will place data under `data/features`.
+Run dataset feature extraction provided by the original repository: `python SingleWordProductionDutch/extract_features.py`. It will place data under `data/features`.
 
 ### Run
-- data preprocess:
-At this point data is downloaded, and the authors' feature extraction is carried out. Now, for training, data has to be further modified ( PCA ), and this is handled by the dataset. The preprocessing can be done by running `python dataset.py`. This will create `data/features/processed_data.npz` which can be used for training. (Now the IEEGDataset's `preprocess_again` attribute shall be set to False)
-
-- train: `python train.py` (relies on data/features/processed_data.npz !). You can check tensorboard logs via `tensorboard --logdir tb_logs --bind_all`
-- test: `python dataset.py`
+- train: At this point data is downloaded, and the authors' feature extraction is carried out. Now, for training, data has to be further modified ( PCA ), and this is handled by the dataset. The preprocessing can be done by running `python train.py --preprocess_again`. This will create `data/features/processed_data.npz` which can be used for training. Note that this has to be done only once, or if new data is added, otherwise you can just run training with `python train.py`
+You can check tensorboard logs via `tensorboard --logdir tb_logs --bind_all`
+- test: `python dataset.py`. The test script uses a dataset saved by the train script before training - `data/test_dataset.pth`.
+Spectograms are predicted from the iEEG data, and besides the loss measurement, speech is synthesized as well.
 
 
 
