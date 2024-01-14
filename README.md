@@ -42,7 +42,12 @@ The dataset can be downloaded via [direct link](https://files.de-1.osf.io/v1/res
 The dataset shall be placed as `data/SingleWordProductionDutch-iBIDS`.
 Run dataset feature extraction provided by the original repository: `python SingleWordProductionDutch/extract_features.py` . It will place data under `data/features`.
 
-### Option2 - docker image
+### Option2 - build docker image
+A docker image can be built directly from the provided Dockerfile. Commands: `docker build -t brain2speech .` and `docker run --gpus all -it -p 6006:6006 -p 22:22 brain2speech`.
+To download dataset run: `download_dataset.sh`. It will be placed as `data/SingleWordProductionDutch-iBIDS`.
+Run dataset feature extraction provided by the original repository: `python SingleWordProductionDutch/extract_features.py`. It will place data under `data/features`.
+
+### Option3 - pull docker image
 A docker image can be pulled and directly used by commands: `docker pull kajc10/brain2speech_dl` and `docker run -it brain2speech_dl`.
 To download dataset run: `download_dataset.sh`. It will be placed as `data/SingleWordProductionDutch-iBIDS`.
 Run dataset feature extraction provided by the original repository: `python SingleWordProductionDutch/extract_features.py`. It will place data under `data/features`.

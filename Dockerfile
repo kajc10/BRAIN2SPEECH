@@ -18,9 +18,9 @@ RUN apt-get update && apt-get install -y \
 
 # Clone the specific branch from the repository
 #RUN git clone -b MSfinal https://github.com/kajc10/BRAIN2SPEECH.git
-#RUN git clone https://github.com/kajc10/BRAIN2SPEECH.git
+RUN git clone https://github.com/kajc10/BRAIN2SPEECH.git 
 
-COPY . /BRAIN2SPEECH
+#COPY . /BRAIN2SPEECH
 
 # Set the cloned directory as work directory
 WORKDIR /BRAIN2SPEECH
