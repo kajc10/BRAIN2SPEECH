@@ -44,8 +44,8 @@ def createAudio(spectrogram, audiosr=16000, winLength=0.05, frameshift=0.01):
 
 
 if __name__=="__main__":
-    feat_path = r'./features'
-    result_path = r'./results'
+    feat_path = os.path.join('.', 'data', 'features')
+    result_path = os.path.join('.', 'outputs', 'authors_outputs')
     pts = ['sub-%02d'%i for i in range(1,11)]
 
     winLength = 0.05
@@ -67,6 +67,7 @@ if __name__=="__main__":
     for pNr, pt in enumerate(pts):
         #Load the data
         spectrogram = np.load(os.path.join(feat_path,f'{pt}_spec.npy'))
+        print('spectrogram shape',spectrogram.shape)
         data = np.load(os.path.join(feat_path,f'{pt}_feat.npy'))
         labels = np.load(os.path.join(feat_path,f'{pt}_procWords.npy'))
         featName = np.load(os.path.join(feat_path,f'{pt}_feat_names.npy'))
@@ -94,6 +95,7 @@ if __name__=="__main__":
             est.fit(trainData, spectrogram[train, :])
             #Predict the reconstructed spectrogram for the test data
             rec_spec[test, :] = est.predict(testData)
+            print('rec_spec shape',rec_spec.shape)
 
             #Evaluate reconstruction of this fold
             for specBin in range(spectrogram.shape[1]):
