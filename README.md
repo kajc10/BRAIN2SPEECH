@@ -43,7 +43,7 @@ The dataset shall be placed as `data/SingleWordProductionDutch-iBIDS`.
 Run dataset feature extraction provided by the original repository: `python SingleWordProductionDutch/extract_features.py` . It will place data under `data/features`.
 
 ### Option2 - docker image
-A docker image can be pulled and directly used by commands: `docker pull kajc10/brain2speech` and `docker run -it brain2speech`.
+A docker image can be pulled and directly used by commands: `docker pull kajc10/brain2speech_dl` and `docker run -it brain2speech_dl`.
 To download dataset run: `download_dataset.sh`. It will be placed as `data/SingleWordProductionDutch-iBIDS`.
 Run dataset feature extraction provided by the original repository: `python SingleWordProductionDutch/extract_features.py`. It will place data under `data/features`.
 

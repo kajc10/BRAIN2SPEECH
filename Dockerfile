@@ -7,12 +7,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     git \
     openssh-server \
-    python3-pip\
+    python3-pip \
     zip \
     unzip \
     nano \
     && rm -rf /var/lib/apt/lists/* \
     && ln -s /usr/bin/python3 /usr/bin/python \
+    && (rm -f /usr/bin/pip || true) \
     && ln -s /usr/bin/pip3 /usr/bin/pip
 
 # Clone the specific branch from the repository

@@ -8,4 +8,3 @@ tb_logs/
 __pycache__/
 lightning_logs/
 outputs/
-docs/
