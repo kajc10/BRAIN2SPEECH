@@ -1,25 +1,30 @@
+import os
+import numpy as np
 import pytorch_lightning as pl
 import torch.nn as nn
 import torch
+#from SingleWordProductionDutch.reconstruction_minimal import createAudio
+import scipy.io.wavfile as wavfile
+from spect2speech import createAudio
 
 class SimpleIEEGModel(pl.LightningModule):
-    def __init__(self, in_ch, hidden_dim, spectrogram_dim): # TODO ethink if wanna use hidden dim for cfg
+    def __init__(self, in_ch, hidden_dim=128, spectrogram_dim=23):
         super(SimpleIEEGModel, self).__init__()
 
         # 1D CNN architecture
         self.cnn = nn.Sequential(
-            nn.Conv1d(in_channels=in_ch, out_channels=64, kernel_size=3, padding=1),
+            nn.Conv1d(in_channels=in_ch, out_channels=hidden_dim//2, kernel_size=3, padding=1),
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=2, stride=2),
             
-            nn.Conv1d(in_channels=64, out_channels=128, kernel_size=3, padding=1),
+            nn.Conv1d(in_channels=64, out_channels=hidden_dim, kernel_size=3, padding=1),
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=2, stride=2),
 
             nn.Flatten(),
-            nn.Linear(128, 128),  
+            nn.Linear(hidden_dim, hidden_dim),  
             nn.ReLU(),
-            nn.Linear(128, spectrogram_dim)
+            nn.Linear(hidden_dim, spectrogram_dim)
         )
 
         self.loss_fn = nn.MSELoss()
@@ -48,8 +53,18 @@ class SimpleIEEGModel(pl.LightningModule):
         pred_spectrogram = self(x)
         loss = self.loss_fn(pred_spectrogram, y_spectrogram)
         self.log("test_loss", loss)
-        return loss
 
+        numpy_pred_spectrogram = pred_spectrogram.cpu().detach().numpy()
+        np.save(os.path.join('outputs','predicted_spectrograms',f'predicted_spectrogram_epoch{self.current_epoch}.npy'), numpy_pred_spectrogram)
+
+        winLength = 0.05
+        frameshift = 0.01
+        audiosr = 16000
+        reconstructedWav = createAudio(numpy_pred_spectrogram,audiosr=audiosr,winLength=winLength,frameshift=frameshift)
+        wavfile.write(os.path.join('outputs','synthesized_voice',f'{self.current_epoch}_predicted.wav'),int(audiosr),reconstructedWav)
+        
+        return loss
+    
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters(), lr=0.001)
 

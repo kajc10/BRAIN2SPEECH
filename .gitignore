@@ -1,7 +1,11 @@
 !data/data.md
+data/
 bin/
 .ipynb_checkpoints/
 launch.json
 checkpoints/
 tb_logs/
 __pycache__/
+lightning_logs/
+outputs/
+docs/

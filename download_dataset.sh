@@ -10,7 +10,7 @@ DATASET_SAVE_PATH="data/"
 mkdir -p "$DATASET_SAVE_PATH"
 
 # The filename for the downloaded file
-DATASET_FILENAME="$DATASET_SAVE_PATH/dataset.zip"
+DATASET_FILENAME="$DATASET_SAVE_PATH/SingleWordProductionDutch-iBIDS.zip"
 
 # Download the dataset
 wget -O "$DATASET_FILENAME" "$DATASET_URL"

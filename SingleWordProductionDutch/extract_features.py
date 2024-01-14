@@ -12,6 +12,11 @@ import scipy.fftpack
 from pynwb import NWBHDF5IO
 import MelFilterBank as mel
 
+def mode_with_numpy(arr):
+    vals, counts = np.unique(arr, return_counts=True)
+    index = np.argmax(counts)
+    return vals[index]
+
 #Small helper function to speed up the hilbert transform by extending the length of data to the next power of 2
 hilbert3 = lambda x: scipy.signal.hilbert(x, scipy.fftpack.next_fast_len(len(x)),axis=0)[:len(x)]
 
@@ -103,7 +108,8 @@ def downsampleLabels(labels, sr, windowLength=0.05, frameshift=0.01):
     for w in range(numWindows):
         start = int(np.floor((w*frameshift)*sr))
         stop = int(np.floor(start+windowLength*sr))
-        newLabels[w]=scipy.stats.mode(labels[start:stop])[0][0].encode("ascii", errors="ignore").decode()
+        #newLabels[w]=scipy.stats.mode(labels[start:stop])[0][0].encode("ascii", errors="ignore").decode()
+        newLabels[w] = mode_with_numpy(labels[start:stop]).encode("ascii", errors="ignore").decode()
     return newLabels
 
 def extractMelSpecs(audio, sr, windowLength=0.05, frameshift=0.01):
@@ -128,7 +134,8 @@ def extractMelSpecs(audio, sr, windowLength=0.05, frameshift=0.01):
         Logarithmic mel scaled spectrogram
     """
     numWindows=int(np.floor((audio.shape[0]-windowLength*sr)/(frameshift*sr)))
-    win = scipy.hanning(np.floor(windowLength*sr + 1))[:-1]
+    #win = scipy.hanning(np.floor(windowLength*sr + 1))[:-1]
+    win = np.hanning(np.floor(windowLength*sr + 1))[:-1]
     spectrogram = np.zeros((numWindows, int(np.floor(windowLength*sr / 2 + 1))),dtype='complex')
     for w in range(numWindows):
         start_audio = int(np.floor((w*frameshift)*sr))
@@ -169,8 +176,8 @@ if __name__=="__main__":
     frameshift = 0.01
     modelOrder = 4
     stepSize = 5
-    path_bids = r'./data/SingleWordProductionDutch-iBIDS'
-    path_output = r'./data/features'
+    path_bids = os.path.join('.', 'data', 'SingleWordProductionDutch-iBIDS')
+    path_output = os.path.join('.', 'data', 'features')
     participants = pd.read_csv(os.path.join(path_bids,'participants.tsv'), delimiter='\t')
     for p_id, participant in enumerate(participants['participant_id']):
         
